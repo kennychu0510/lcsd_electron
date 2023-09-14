@@ -2,7 +2,7 @@ import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'path';
 import { PlaywrightController } from './Backend/Playwright';
 import { URL } from './url';
-import { saveBase64Img } from './Backend/ocr/helper';
+import { getBufferFromBase64, saveBase64Img } from './Backend/ocr/helper';
 import { cleanImg, getText } from './Backend/ocr';
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -36,9 +36,14 @@ const createWindow = () => {
     await playwright.launch(URL.enquireEN);
     mainWindow.webContents.send('playwright-update', 'launched');
     const base64Img = await playwright.getRecapchaImg();
+
+    /* DEV */
     const imgPath = saveBase64Img(base64Img);
-    const cleanedImg = await cleanImg(imgPath);
-    const text = await getText(cleanedImg);
+
+    const buffer = getBufferFromBase64(base64Img);
+
+    const cleanedBuffer = await cleanImg(buffer, { devMode: true, imagePath: imgPath });
+    const text = await getText(cleanedBuffer);
     console.log(text);
   });
 

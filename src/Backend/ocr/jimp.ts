@@ -1,6 +1,12 @@
 import Jimp from 'jimp';
 
-export async function jimpCleanImage(imagePath: string) {
+export async function jimpCleanImage(
+  imagePath: any,
+  options?: {
+    devMode: boolean;
+    imagePath: string;
+  }
+) {
   const image = await Jimp.read(imagePath);
 
   let trimAmount = 1;
@@ -81,10 +87,11 @@ export async function jimpCleanImage(imagePath: string) {
   image.convolute(kernel);
 
   // Save the cleaned image
-  const cleanedImagePath = imagePath.replace('raw', 'parsed');
-  await image.writeAsync(cleanedImagePath);
+  if (options.devMode) {
+    const cleanedImagePath = options.imagePath.replace('raw', 'parsed');
+    await image.writeAsync(cleanedImagePath);
+  }
 
-  return cleanedImagePath
-  // const buffer = await image.getBufferAsync(`image/${image.getExtension()}`);
-  // return buffer;
+  const buffer = await image.getBufferAsync(`image/${image.getExtension()}`);
+  return buffer;
 }
