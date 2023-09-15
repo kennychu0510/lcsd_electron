@@ -87,7 +87,7 @@ export async function jimpCleanImage(
   image.convolute(kernel);
 
   // Save the cleaned image
-  if (options.devMode) {
+  if (options && options.devMode) {
     const cleanedImagePath = options.imagePath.replace('raw', 'parsed');
     await image.writeAsync(cleanedImagePath);
   }

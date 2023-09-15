@@ -6,6 +6,7 @@ export async function cleanImg(buffer: any, options?: {
   imagePath: string;
 }) {
   const cleanedImg = await jimpCleanImage(buffer, options);
+  console.log('GOT CLEANED IMG')
   return cleanedImg;
 }
 

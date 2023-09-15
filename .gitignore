@@ -92,3 +92,5 @@ typings/
 out/
 
 /src/Backend/ocr/history
+
+/dist

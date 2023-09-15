@@ -9,7 +9,7 @@ root.render(<App />);
 function App() {
   const [playwrightStatus, setPlaywrightStatus] = useState('idle');
   function onEnquire() {
-    window.ElectronAPI.onEnquire();
+    // window.ElectronAPI.onEnquire();
   }
 
   function onClose() {
