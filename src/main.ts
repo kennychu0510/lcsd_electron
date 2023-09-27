@@ -1,7 +1,7 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'path';
 import { PlaywrightController } from './Backend/Playwright';
-import { URL } from './url';
+import { URLS } from './links';
 import { getBufferFromBase64, getPossibleCombo, isValidCombo, saveBase64Img } from './Backend/ocr/helper';
 import { cleanImg, getText } from './Backend/ocr';
 
@@ -32,7 +32,7 @@ const createWindow = () => {
   mainWindow.webContents.openDevTools();
 
   async function playwrightMain() {
-    await playwright.launch(URL.enquireLandingEN);
+    await playwright.launch(URLS.enquireLandingEN);
     mainWindow.webContents.send('playwright-update', 'On Enquire Landing Page');
 
     async function autoCompleteRecapcha(retry = 5) {
@@ -64,7 +64,7 @@ const createWindow = () => {
       }
     }
 
-    await autoCompleteRecapcha(10);
+    // await autoCompleteRecapcha(10);
     console.log('PLAYWRIGHT MAIN - DONE');
   }
 

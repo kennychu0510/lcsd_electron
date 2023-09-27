@@ -10,7 +10,8 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "eslint --ext .ts,.tsx ."
+    "lint": "eslint --ext .ts,.tsx .",
+    "playwright": "npx ts-node src/Backend/tests/playwrightRunner.ts"
   },
   "keywords": [],
   "author": {
@@ -41,8 +42,10 @@
     "vitest": "^0.34.4"
   },
   "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
     "electron-squirrel-startup": "^1.0.0",
     "jimp": "^0.22.10",
+    "moment": "^2.29.4",
     "playwright": "^1.38.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -1,7 +1,9 @@
 import { firefox, Browser, Page } from 'playwright';
 import { waitForDOMElementChange } from './ocr/helper';
-import { URL } from '../url';
+import { URLS } from '../links';
 import { LCSD_PAGE_ERRORS } from '../pageErrors';
+import { getEnquiryDates } from './options/dates';
+import Locator from './locator';
 export class PlaywrightController {
   private browser: Browser;
   private page: Page;
@@ -104,5 +106,21 @@ export class PlaywrightController {
     for (let button of selectedBtns) {
       await button.click();
     }
+  }
+
+  async selectDate(selectedDate: string) {
+    await this.page.locator(Locator.dateSelect).selectOption(selectedDate);
+  }
+
+  async selectFacility(selectedFacility: string) {
+    await this.page.locator(Locator.facilitySelect).selectOption(selectedFacility);
+  }
+
+  async selectTime(selectedTime: string) {
+    await this.page.locator(Locator.timeSelect).selectOption(selectedTime);
+  }
+
+  async selectArea(selectedArea: string) {
+    await this.page.locator(Locator.areaSelect).selectOption(selectedArea);
   }
 }
