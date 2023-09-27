@@ -1,9 +1,12 @@
 import moment from 'moment';
 
 export function getEnquiryDates() {
-  const dates: number[] = [];
+  const dates: Map<string, { value: number }> = new Map();
   for (let i = 0; i < 8; i++) {
-    dates.push(Number(moment().add(i, 'day').format('YYYYMMDD')));
+    const dateMoment = moment().add(i, 'day');
+    const value = Number(dateMoment.format('YYYYMMDD'));
+    const key = dateMoment.format('DD/MM/YYYY (ddd)');
+    dates.set(key, { value });
   }
   return dates;
 }

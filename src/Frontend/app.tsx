@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
+import { getEnquiryDates } from '../../src/Backend/options/dates';
+import Dropdown from './components/Dropdown';
 const container = document.getElementById('app');
 
 const root = createRoot(container);
 root.render(<App />);
+
+const dateOptions = getEnquiryDates()
 
 function App() {
   const [playwrightStatus, setPlaywrightStatus] = useState('idle');
   function onEnquire() {
     // window.ElectronAPI.onEnquire();
   }
+
 
   function onClose() {
     window.ElectronAPI.onCloseBrowser();
@@ -31,6 +36,8 @@ function App() {
           Close
         </button>
       </div>
+
+      <Dropdown label='Date Select' options={dateOptions} />
 
       <div className='my-2'>
         <h2>Status:</h2>

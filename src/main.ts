@@ -70,7 +70,7 @@ const createWindow = () => {
 
   /* Start playwright on start */
   try {
-    playwrightMain();
+    // playwrightMain();
   } catch (error) {
     console.log(error);
   }
